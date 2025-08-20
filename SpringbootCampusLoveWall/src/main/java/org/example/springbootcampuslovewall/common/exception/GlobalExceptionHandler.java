@@ -1,8 +1,9 @@
 package org.example.springbootcampuslovewall.common.exception;
 
-import com.example.common.result.R;
-import com.example.common.result.ResultCodeEnum;
+
 import lombok.extern.slf4j.Slf4j;
+import org.example.springbootcampuslovewall.common.result.R;
+import org.example.springbootcampuslovewall.common.result.ResultCodeEnum;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.BindException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
