@@ -9,6 +9,6 @@ import org.springframework.context.annotation.Configuration;
  * 配置MyBatis相关设置，包括Mapper接口的扫描路径
  */
 @Configuration
-@MapperScan("com.example.modules.system.mapper")
+@MapperScan("org.example.springbootcampuslovewall.mapper")
 public class MyBatisConfig {
 }
