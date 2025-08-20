@@ -42,7 +42,7 @@ public class SecurityConfig {
                 .requestMatchers(
                         "/auth/login", "/auth/refresh-token", "/auth/register",
                         "/files/upload/**", "/files/download/**",
-                        "/favicon.ico", "/qrcode/**"
+                        "/favicon.ico", "/qrcode/**","/web/hello"
                 ).permitAll()
                 .anyRequest().authenticated()
                 .and()
