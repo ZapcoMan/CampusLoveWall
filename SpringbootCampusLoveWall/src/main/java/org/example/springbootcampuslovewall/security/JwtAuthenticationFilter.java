@@ -37,7 +37,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private static final List<String> WHITE_LIST = Arrays.asList(
             "/auth/login", "/auth/register", "/auth/refresh-token",
-            "/files/upload", "/files/download", "/favicon.ico"
+            "/files/upload", "/files/download", "/favicon.ico","/web/hello"
     );
 
 
