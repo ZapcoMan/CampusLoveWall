@@ -1,9 +1,10 @@
 package org.example.springbootcampuslovewall.common.exception;
 
-import com.example.common.result.ResultCodeEnum;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
+import org.example.springbootcampuslovewall.common.result.ResultCodeEnum;
 
 /**
  * 自定义业务异常，包含异常代码与异常消息
