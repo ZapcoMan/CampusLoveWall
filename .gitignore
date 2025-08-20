@@ -31,7 +31,7 @@ node_modules/
 ### Mac OS ###
 .DS_Store
 
-springboot/target/*
+**/target/*
 
 # Compiled class file
 !*.class
