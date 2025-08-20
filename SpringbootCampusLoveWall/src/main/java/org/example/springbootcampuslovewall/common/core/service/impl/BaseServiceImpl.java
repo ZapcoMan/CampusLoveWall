@@ -1,6 +1,8 @@
 package org.example.springbootcampuslovewall.common.core.service.impl;
 
-import com.example.core.service.BaseService;
+
+
+import org.example.springbootcampuslovewall.common.core.service.BaseService;
 
 import java.util.List;
 
