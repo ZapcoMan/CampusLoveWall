@@ -1,7 +1,5 @@
 package org.example.springbootcampuslovewall.common.core.controller;
 
-
-
 import io.swagger.v3.oas.annotations.Operation;
 import org.example.springbootcampuslovewall.common.core.service.BaseService;
 import org.example.springbootcampuslovewall.common.result.R;
