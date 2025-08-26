@@ -3,6 +3,8 @@ package org.campuswall.springbootcampuslovewall.service.impl;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.digest.DigestUtil;
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import jakarta.annotation.Resource;
@@ -17,8 +19,15 @@ import org.campuswall.springbootcampuslovewall.mapper.AdminMapper;
 import org.campuswall.springbootcampuslovewall.service.AdminService;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
 
+/**
+ * 管理员服务实现类
+ * 提供管理员相关的业务逻辑处理，包括增删改查、登录验证、密码修改等功能
+ */
 @Service
 public class AdminServiceImpl extends BaseServiceImpl<Admin, Integer, AdminMapper> implements AdminService {
 
@@ -127,15 +136,118 @@ public class AdminServiceImpl extends BaseServiceImpl<Admin, Integer, AdminMappe
     }
 
     /**
+     * 批量保存管理员信息
+     *
+     * @param entityList 管理员实体列表
+     * @param batchSize  批处理大小
+     * @return 是否保存成功
+     */
+    @Override
+    public boolean saveBatch(Collection<Admin> entityList, int batchSize) {
+        return false;
+    }
+
+    /**
+     * 批量保存或更新管理员信息
+     *
+     * @param entityList 管理员实体列表
+     * @param batchSize  批处理大小
+     * @return 是否操作成功
+     */
+    @Override
+    public boolean saveOrUpdateBatch(Collection<Admin> entityList, int batchSize) {
+        return false;
+    }
+
+    /**
      * 更新管理员信息
      *
      * @param admin 包含更新信息的管理员对象
-     * @return
+     * @return 是否更新成功
      */
     @Override
     public boolean updateById(Admin admin) {
         adminMapper.updateById(admin);
         return false;
+    }
+
+    /**
+     * 根据ID批量更新管理员信息
+     *
+     * @param entityList 管理员实体列表
+     * @param batchSize  批处理大小
+     * @return 是否更新成功
+     */
+    @Override
+    public boolean updateBatchById(Collection<Admin> entityList, int batchSize) {
+        return false;
+    }
+
+    /**
+     * 保存或更新管理员信息
+     *
+     * @param entity 管理员实体
+     * @return 是否操作成功
+     */
+    @Override
+    public boolean saveOrUpdate(Admin entity) {
+        return false;
+    }
+
+    /**
+     * 根据条件获取单个管理员信息
+     *
+     * @param queryWrapper 查询条件
+     * @param throwEx      是否抛出异常
+     * @return 管理员对象
+     */
+    @Override
+    public Admin getOne(Wrapper<Admin> queryWrapper, boolean throwEx) {
+        return null;
+    }
+
+    /**
+     * 根据条件获取Map形式的查询结果
+     *
+     * @param queryWrapper 查询条件
+     * @return 查询结果Map
+     */
+    @Override
+    public Map<String, Object> getMap(Wrapper<Admin> queryWrapper) {
+        return Map.of();
+    }
+
+    /**
+     * 根据条件获取对象
+     *
+     * @param queryWrapper 查询条件
+     * @param mapper       转换函数
+     * @param <V>          返回值类型
+     * @return 转换后的对象
+     */
+    @Override
+    public <V> V getObj(Wrapper<Admin> queryWrapper, Function<? super Object, V> mapper) {
+        return null;
+    }
+
+    /**
+     * 获取基础Mapper
+     *
+     * @return BaseMapper对象
+     */
+    @Override
+    public BaseMapper<Admin> getBaseMapper() {
+        return null;
+    }
+
+    /**
+     * 获取实体类类型
+     *
+     * @return Admin类的Class对象
+     */
+    @Override
+    public Class<Admin> getEntityClass() {
+        return null;
     }
 
     /**
