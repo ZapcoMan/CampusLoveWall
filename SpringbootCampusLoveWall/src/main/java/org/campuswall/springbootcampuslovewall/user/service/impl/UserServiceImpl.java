@@ -1,12 +1,18 @@
-package org.campuswall.springbootcampuslovewall.service.impl;
+package org.campuswall.springbootcampuslovewall.user.service.impl;
 
+import cn.hutool.crypto.digest.DigestUtil;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import jakarta.annotation.Resource;
 import org.campuswall.springbootcampuslovewall.common.core.service.impl.BaseServiceImpl;
-import org.campuswall.springbootcampuslovewall.entity.User;
+import org.campuswall.springbootcampuslovewall.common.exception.CustomerException;
+import org.campuswall.springbootcampuslovewall.common.utils.TokenUtils;
+import org.campuswall.springbootcampuslovewall.entity.Account;
+
 import org.campuswall.springbootcampuslovewall.mapper.UserMapper;
-import org.campuswall.springbootcampuslovewall.service.UserService;
+
+import org.campuswall.springbootcampuslovewall.user.entity.User;
+import org.campuswall.springbootcampuslovewall.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +26,7 @@ import java.util.function.Function;
  * 提供用户相关的业务逻辑实现
  */
 @Service
-public class UserServiceImpl extends BaseServiceImpl<User, Long, UserMapper> implements UserService  {
+public class UserServiceImpl extends BaseServiceImpl<User, Long, UserMapper> implements UserService {
 
     @Resource
     private UserMapper userMapper;
@@ -52,15 +58,61 @@ public class UserServiceImpl extends BaseServiceImpl<User, Long, UserMapper> imp
         return userMapper.selectById(id);
     }
 
-    /**
-     * 查询所有用户信息
-     *
-     * @return 用户列表
-     */
     @Override
     public List<User> selectAll() {
         return List.of();
     }
+
+    /**
+     * 用户登录方法
+     *
+     * @param account 包含用户名和密码的账户信息
+     * @return 登录成功的用户对象
+     * @throws CustomerException 如果账号不存在或密码错误，则抛出此异常
+     */
+    @Override
+    public Account login(Account account) {
+        // 验证账号是否存在
+        User dbUser = userMapper.findByUsername(account.getUsername());
+        if (dbUser == null) {
+            throw new CustomerException("账号不存在");
+        }
+
+        // 获取输入的密码和数据库中的密码
+        String inputPassword = account.getPassword();
+        String dbUserPassword = dbUser.getPassword();
+
+        // 生成输入密码的摘要
+        String inputHash = DigestUtil.md5Hex(inputPassword);
+        // 验证密码是否匹配
+        boolean isValid = dbUserPassword.equals(inputHash);
+
+        // 如果密码不正确，抛出异常
+        if (!isValid) {
+            throw new CustomerException("账号或密码错误");
+        }
+
+        // 创建token并返回给前端
+        String token = TokenUtils.createToken(dbUser.getId() + "-" + "USER", dbUser.getPassword());
+        Account loginAccount = new Account();
+        loginAccount.setId(Math.toIntExact(dbUser.getId()));
+        loginAccount.setUsername(dbUser.getUsername());
+        loginAccount.setRole("USER");
+        loginAccount.setToken(token);
+        return loginAccount;
+    }
+
+    /**
+     * 更新用户密码
+     *
+     * @param account 包含新密码信息的账户对象
+     */
+    @Override
+    public void updatePassword(Account account) {
+        // 可根据需要实现密码更新逻辑
+    }
+
+
 
     /**
      * 根据ID更新用户信息
@@ -82,17 +134,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, Long, UserMapper> imp
 
     }
 
-    /**
-     * 批量保存用户信息
-     *
-     * @param userList  用户实体列表
-     * @param batchSize 批量大小
-     * @return 是否保存成功
-     */
-    @Override
-    public boolean saveBatch(Collection<User> userList, int batchSize) {
-        return false;
-    }
+
 
     /**
      * 批量保存或更新用户信息
@@ -117,17 +159,6 @@ public class UserServiceImpl extends BaseServiceImpl<User, Long, UserMapper> imp
         return false;
     }
 
-    /**
-     * 批量根据ID更新用户信息
-     *
-     * @param userList  用户实体列表
-     * @param batchSize 批量大小
-     * @return 是否更新成功
-     */
-    @Override
-    public boolean updateBatchById(Collection<User> userList, int batchSize) {
-        return false;
-    }
 
     /**
      * 保存或更新用户信息
@@ -140,37 +171,27 @@ public class UserServiceImpl extends BaseServiceImpl<User, Long, UserMapper> imp
         return false;
     }
 
-    /**
-     * 根据条件获取单个用户
-     *
-     * @param queryWrapper 查询条件包装器
-     * @param throwEx      是否抛出异常
-     * @return 匹配的用户对象
-     */
+
+    @Override
+    public boolean saveBatch(Collection<User> entityList, int batchSize) {
+        return false;
+    }
+
+    @Override
+    public boolean updateBatchById(Collection<User> entityList, int batchSize) {
+        return false;
+    }
+
     @Override
     public User getOne(Wrapper<User> queryWrapper, boolean throwEx) {
         return null;
     }
 
-    /**
-     * 根据条件获取Map结果
-     *
-     * @param queryWrapper 查询条件包装器
-     * @return Map结果
-     */
     @Override
     public Map<String, Object> getMap(Wrapper<User> queryWrapper) {
         return Map.of();
     }
 
-    /**
-     * 根据条件获取对象
-     *
-     * @param queryWrapper 查询条件包装器
-     * @param mapper       转换函数
-     * @param <V>          返回值类型
-     * @return 转换后的结果
-     */
     @Override
     public <V> V getObj(Wrapper<User> queryWrapper, Function<? super Object, V> mapper) {
         return null;
