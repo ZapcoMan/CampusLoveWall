@@ -9,7 +9,7 @@ import lombok.Getter;
  */
 @Getter
 public enum RoleEnum {
-    ADMIN("ADMIN", "管理员");
+    ADMIN("ADMIN", "管理员"), USER("USER","用户" );
 
     private final String code;
     private final String label;
