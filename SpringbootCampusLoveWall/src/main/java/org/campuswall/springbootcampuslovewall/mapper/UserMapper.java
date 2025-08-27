@@ -6,4 +6,5 @@ import org.campuswall.springbootcampuslovewall.entity.User;
 
 @Mapper
 public interface UserMapper extends BaseMapperPlus<User, Integer> {
+    User findByUsername(String username);
 }
