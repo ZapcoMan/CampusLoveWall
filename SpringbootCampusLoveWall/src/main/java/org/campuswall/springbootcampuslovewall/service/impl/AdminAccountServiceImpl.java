@@ -35,10 +35,10 @@ public class AdminAccountServiceImpl extends BaseServiceImpl<Account, String, Ad
     /**
      * 构造函数，初始化管理员映射器
      *
-     * @param mapper 管理员数据映射器
+     * @param adminMapper 管理员数据映射器
      */
-    public AdminAccountServiceImpl(AdminMapper mapper) {
-        super(mapper);
+    public AdminAccountServiceImpl(AdminMapper adminMapper) {
+        super(adminMapper);
     }
 
     /**
