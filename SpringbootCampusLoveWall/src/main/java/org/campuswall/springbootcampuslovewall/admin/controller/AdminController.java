@@ -1,11 +1,11 @@
-package org.campuswall.springbootcampuslovewall.controller;
+package org.campuswall.springbootcampuslovewall.admin.controller;
 
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.campuswall.springbootcampuslovewall.common.core.controller.BaseController;
 import org.campuswall.springbootcampuslovewall.common.result.R;
-import org.campuswall.springbootcampuslovewall.entity.Admin;
-import org.campuswall.springbootcampuslovewall.service.AdminService;
+import org.campuswall.springbootcampuslovewall.admin.entity.Admin;
+import org.campuswall.springbootcampuslovewall.admin.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
