@@ -1,4 +1,4 @@
-package org.campuswall.springbootcampuslovewall.service.impl;
+package org.campuswall.springbootcampuslovewall.auth.service.impl;
 
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
@@ -8,8 +8,8 @@ import org.campuswall.springbootcampuslovewall.common.core.service.impl.BaseServ
 import org.campuswall.springbootcampuslovewall.common.enums.RoleEnum;
 import org.campuswall.springbootcampuslovewall.entity.Account;
 import org.campuswall.springbootcampuslovewall.mapper.AdminMapper;
-import org.campuswall.springbootcampuslovewall.service.AccountService;
-import org.campuswall.springbootcampuslovewall.service.AdminService;
+import org.campuswall.springbootcampuslovewall.auth.service.AccountService;
+import org.campuswall.springbootcampuslovewall.admin.service.AdminService;
 import org.springframework.stereotype.Service;
 
 
