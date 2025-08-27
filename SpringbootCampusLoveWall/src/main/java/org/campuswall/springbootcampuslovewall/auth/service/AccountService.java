@@ -1,4 +1,4 @@
-package org.campuswall.springbootcampuslovewall.service;
+package org.campuswall.springbootcampuslovewall.auth.service;
 
 import org.campuswall.springbootcampuslovewall.common.core.service.BaseService;
 import org.campuswall.springbootcampuslovewall.common.enums.RoleEnum;
