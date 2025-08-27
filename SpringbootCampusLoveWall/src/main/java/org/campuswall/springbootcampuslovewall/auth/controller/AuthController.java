@@ -1,4 +1,4 @@
-package org.campuswall.springbootcampuslovewall.controller;
+package org.campuswall.springbootcampuslovewall.auth.controller;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.Resource;
@@ -6,8 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.campuswall.springbootcampuslovewall.common.exception.CustomerException;
 import org.campuswall.springbootcampuslovewall.common.result.R;
 import org.campuswall.springbootcampuslovewall.entity.Account;
-import org.campuswall.springbootcampuslovewall.service.AccountService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.campuswall.springbootcampuslovewall.auth.service.AccountService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
