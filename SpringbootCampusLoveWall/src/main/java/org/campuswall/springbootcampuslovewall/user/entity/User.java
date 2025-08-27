@@ -1,4 +1,4 @@
-package org.campuswall.springbootcampuslovewall.entity;
+package org.campuswall.springbootcampuslovewall.user.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
