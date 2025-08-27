@@ -1,4 +1,4 @@
-package org.campuswall.springbootcampuslovewall.service.impl;
+package org.campuswall.springbootcampuslovewall.admin.service.impl;
 
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.digest.DigestUtil;
@@ -14,9 +14,9 @@ import org.campuswall.springbootcampuslovewall.common.core.service.impl.BaseServ
 import org.campuswall.springbootcampuslovewall.common.exception.CustomerException;
 import org.campuswall.springbootcampuslovewall.common.utils.TokenUtils;
 import org.campuswall.springbootcampuslovewall.entity.Account;
-import org.campuswall.springbootcampuslovewall.entity.Admin;
+import org.campuswall.springbootcampuslovewall.admin.entity.Admin;
 import org.campuswall.springbootcampuslovewall.mapper.AdminMapper;
-import org.campuswall.springbootcampuslovewall.service.AdminService;
+import org.campuswall.springbootcampuslovewall.admin.service.AdminService;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
