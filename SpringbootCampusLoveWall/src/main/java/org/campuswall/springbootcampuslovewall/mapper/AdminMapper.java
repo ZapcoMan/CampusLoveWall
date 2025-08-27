@@ -5,7 +5,7 @@ import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.campuswall.springbootcampuslovewall.common.core.mapper.BaseMapperPlus;
-import org.campuswall.springbootcampuslovewall.entity.Admin;
+import org.campuswall.springbootcampuslovewall.admin.entity.Admin;
 
 import java.util.List;
 
