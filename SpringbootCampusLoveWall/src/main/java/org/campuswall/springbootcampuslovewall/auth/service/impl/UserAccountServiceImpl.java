@@ -1,15 +1,17 @@
-package org.campuswall.springbootcampuslovewall.service.impl;
+package org.campuswall.springbootcampuslovewall.auth.service.impl;
 
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import jakarta.annotation.Resource;
+import org.campuswall.springbootcampuslovewall.auth.service.AccountService;
 import org.campuswall.springbootcampuslovewall.common.core.service.impl.BaseServiceImpl;
 import org.campuswall.springbootcampuslovewall.common.enums.RoleEnum;
 import org.campuswall.springbootcampuslovewall.entity.Account;
 import org.campuswall.springbootcampuslovewall.mapper.UserMapper;
-import org.campuswall.springbootcampuslovewall.service.AccountService;
-import org.campuswall.springbootcampuslovewall.service.UserService;
+
+import org.campuswall.springbootcampuslovewall.user.entity.User;
+import org.campuswall.springbootcampuslovewall.user.service.UserService;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -22,7 +24,7 @@ import java.util.function.Function;
  * 实现了AccountService接口，用于处理普通用户账户相关的业务逻辑
  */
 @Service
-public class UserAccountServiceImpl extends BaseServiceImpl<Account, String, UserMapper> implements AccountService  {
+public class UserAccountServiceImpl extends BaseServiceImpl<Account, String, UserMapper> implements AccountService {
 
     @Resource
     private UserService userService;
@@ -33,27 +35,45 @@ public class UserAccountServiceImpl extends BaseServiceImpl<Account, String, Use
 
     @Override
     public Account selectById(Long aLong) {
-        return null;
+        User user = userService.selectById(aLong);
+        if (user == null) {
+            return null;
+        }
+        Account account = new Account();
+        account.setId(Math.toIntExact(user.getId()));
+        account.setUsername(user.getUsername());
+        account.setPassword(user.getPassword());
+        account.setRole(user.getRole());
+        return account;
     }
 
     @Override
     public RoleEnum getRole() {
-        return null;
+        return RoleEnum.USER;
     }
 
     @Override
     public Account selectById(String s) {
-        return null;
+        org.campuswall.springbootcampuslovewall.user.entity.User user = userService.selectById(Long.valueOf(s));
+        if (user == null) {
+            return null;
+        }
+        Account account = new Account();
+        account.setId(Math.toIntExact(user.getId()));
+        account.setUsername(user.getUsername());
+        account.setPassword(user.getPassword());
+        account.setRole(user.getRole());
+        return account;
     }
 
     @Override
     public void updatePassword(Account account) {
-
+        userService.updatePassword(account);
     }
 
     @Override
     public Account login(Account account) {
-        return null;
+        return userService.login(account);
     }
 
     @Override
@@ -125,6 +145,4 @@ public class UserAccountServiceImpl extends BaseServiceImpl<Account, String, Use
     public void deleteById(String s) {
 
     }
-
-
 }
