@@ -1,7 +1,5 @@
 package org.campuswall.springbootcampuslovewall.common.core.service.impl;
 
-
-
 import org.campuswall.springbootcampuslovewall.common.core.service.BaseService;
 
 import java.util.List;
