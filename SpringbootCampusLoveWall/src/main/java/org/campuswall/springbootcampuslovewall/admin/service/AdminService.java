@@ -1,10 +1,10 @@
-package org.campuswall.springbootcampuslovewall.service;
+package org.campuswall.springbootcampuslovewall.admin.service;
 
 
 import com.github.pagehelper.PageInfo;
 import org.campuswall.springbootcampuslovewall.common.core.service.BaseService;
 import org.campuswall.springbootcampuslovewall.entity.Account;
-import org.campuswall.springbootcampuslovewall.entity.Admin;
+import org.campuswall.springbootcampuslovewall.admin.entity.Admin;
 
 import java.util.List;
 
