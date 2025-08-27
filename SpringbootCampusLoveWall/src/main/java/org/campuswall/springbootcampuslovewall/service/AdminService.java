@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * 管理员服务接口，定义了管理员相关的操作
  */
-public interface AdminService extends BaseService<Admin, Integer> {
+public interface AdminService extends BaseService<Admin, Long> {
     /**
      * 添加管理员
      *
@@ -31,7 +31,7 @@ public interface AdminService extends BaseService<Admin, Integer> {
      *
      * @param id 管理员的ID
      */
-    void deleteById(Integer id);
+    void deleteById(Long id);
 
     /**
      * 批量删除管理员
@@ -63,7 +63,7 @@ public interface AdminService extends BaseService<Admin, Integer> {
      * @param admin    用于查询条件的管理员对象，可以为空
      * @return 返回包含分页信息的PageInfo对象
      */
-    PageInfo<Admin> selectPage(Integer pageNum, Integer pageSize, Admin admin);
+    PageInfo<Admin> selectPage(Long pageNum, Long pageSize, Admin admin);
 
     /**
      * 管理员登录
