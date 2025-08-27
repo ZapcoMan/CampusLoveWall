@@ -9,7 +9,7 @@ import jakarta.annotation.PostConstruct;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import org.campuswall.springbootcampuslovewall.entity.Account;
-import org.campuswall.springbootcampuslovewall.service.impl.AdminServiceImpl;
+import org.campuswall.springbootcampuslovewall.admin.service.impl.AdminServiceImpl;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
