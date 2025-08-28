@@ -1,0 +1,29 @@
+# Maven相关
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+
+# IDE相关
+.idea/
+*.iws
+*.iml
+*.ipr
+out/
+*.log
+
+# Git相关
+.git
+.gitignore
+
+# Docker相关
+Dockerfile
+.dockerignore
+
+# 其他
+README.md
