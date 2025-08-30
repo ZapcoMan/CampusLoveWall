@@ -3,7 +3,8 @@ package org.campuswall.springbootcampuslovewall.auth.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.github.pagehelper.PageInfo;import jakarta.annotation.Resource;
+import com.github.pagehelper.PageInfo;
+import jakarta.annotation.Resource;
 import org.campuswall.springbootcampuslovewall.admin.entity.Admin;
 import org.campuswall.springbootcampuslovewall.common.core.service.impl.BaseServiceImpl;
 import org.campuswall.springbootcampuslovewall.common.enums.RoleEnum;
@@ -50,7 +51,9 @@ public class AdminAccountServiceImpl extends BaseServiceImpl<Account, String, Ad
     @Override
     public RoleEnum getRole() {
         return RoleEnum.ADMIN;
-    }@Override
+    }
+
+    @Override
     public Account selectById(Integer id) {
         return null;
     }
@@ -74,14 +77,16 @@ public class AdminAccountServiceImpl extends BaseServiceImpl<Account, String, Ad
      */
     @Override
     public Account selectById(String id) {
-        Admin admin =  adminService.selectById(Long.valueOf(id));
+        Admin admin = adminService.selectById(Long.valueOf(id));
         Account account = new Account();
         account.setId(Math.toIntExact(admin.getId()));
         account.setUsername(admin.getUsername());
         account.setPassword(admin.getPassword());
         account.setRole(admin.getRole());
         return account;
-    }@Override
+    }
+
+    @Override
     public void deleteById(Integer id) {
 
     }
@@ -239,7 +244,9 @@ public class AdminAccountServiceImpl extends BaseServiceImpl<Account, String, Ad
     @Override
     public void deleteById(String id) {
 
-    }@Override
+    }
+
+    @Override
     public PageInfo<Admin> selectPage(Integer pageNum, Integer pageSize, Admin admin) {
         return null;
     }
@@ -252,7 +259,7 @@ public class AdminAccountServiceImpl extends BaseServiceImpl<Account, String, Ad
      */
     @Override
     public Account login(Account account) {
-        Admin admin =  adminService.login(account);
+        Admin admin = adminService.login(account);
         Account accounts = new Account();
         accounts.setId(Math.toIntExact(admin.getId()));
         accounts.setUsername(admin.getUsername());
