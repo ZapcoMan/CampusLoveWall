@@ -1,6 +1,6 @@
 package org.campuswall.springbootcampuslovewall.common.core.service.impl;
 
-import org.campuswall.springbootcampuslovewall.common.core.service.BaseService;
+import com.github.pagehelper.PageInfo;import org.campuswall.springbootcampuslovewall.admin.entity.Admin;import org.campuswall.springbootcampuslovewall.common.core.service.BaseService;
 
 import java.util.List;
 
@@ -18,12 +18,12 @@ public abstract class BaseServiceImpl<T, ID, M> implements BaseService<T, ID> {
         this.mapper = mapper;
     }
 
-    public abstract T selectById(Long aLong);
+    public abstract T selectById(Long id);
 
     @Override
     public abstract T selectById(ID id);
 
-    @Override
+    public abstract void deleteById(Integer id);@Override
     public abstract List<T> selectAll();
 
     public abstract void updateById(Long id);
@@ -36,4 +36,4 @@ public abstract class BaseServiceImpl<T, ID, M> implements BaseService<T, ID> {
 
     @Override
     public abstract void deleteById(ID id);
-}
+public abstract PageInfo<Admin> selectPage(Integer pageNum, Integer pageSize, Admin admin);}
