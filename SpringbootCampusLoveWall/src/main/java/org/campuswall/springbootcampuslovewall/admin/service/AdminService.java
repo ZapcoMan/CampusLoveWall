@@ -46,7 +46,7 @@ public interface AdminService extends BaseService<Admin, Long> {
      * @param id 管理员的ID
      * @return 返回查询到的管理员对象，如果没有找到则返回null
      */
-    Admin selectById(String id);
+    Admin selectById(Long id);
 
     /**
      * 查询所有管理员
