@@ -21,7 +21,7 @@ public interface AccountService extends BaseService<Account, String> {
      * @param id 账户的唯一标识符
      * @return Account类型，表示查询到的账户信息
      */
-    Account selectById(String id);
+    Account selectById(Integer id);
 
     /**
      * 更新账户的密码
