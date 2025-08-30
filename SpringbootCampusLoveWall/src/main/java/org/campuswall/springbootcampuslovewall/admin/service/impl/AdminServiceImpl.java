@@ -29,7 +29,7 @@ import java.util.function.Function;
  * 提供管理员相关的业务逻辑处理，包括增删改查、登录验证、密码修改等功能
  */
 @Service
-public class AdminServiceImpl extends BaseServiceImpl<Admin, Integer, AdminMapper> implements AdminService {
+public class AdminServiceImpl extends BaseServiceImpl<Admin, Long, AdminMapper> implements AdminService {
 
     @Resource
     AdminMapper adminMapper;
@@ -39,6 +39,18 @@ public class AdminServiceImpl extends BaseServiceImpl<Admin, Integer, AdminMappe
     public AdminServiceImpl(AdminMapper mapper) {
         super(mapper);
     }
+
+    /**
+     * 根据ID查询管理员信息
+     *
+     * @param id 要查询的管理员账户ID
+     * @return 查询到的管理员对象
+     */
+    @Override
+    public Admin selectById(Long id) {
+        return adminMapper.selectById(String.valueOf(id));
+    }
+
 
     /**
      * 添加管理员账户
@@ -71,13 +83,17 @@ public class AdminServiceImpl extends BaseServiceImpl<Admin, Integer, AdminMappe
         adminMapper.updateById(admin);
     }
 
+    @Override
+    public void deleteById(Long id) {
+        adminMapper.deleteById(id);
+    }
+
     /**
      * 根据ID删除管理员账户
      *
      * @param id 要删除的管理员账户ID
      */
-    @Override
-    public void deleteById(Integer id) {
+    @Override public void deleteById(Integer id) {
         adminMapper.deleteById(id);
     }
 
@@ -93,37 +109,6 @@ public class AdminServiceImpl extends BaseServiceImpl<Admin, Integer, AdminMappe
         }
     }
 
-    /**
-     * 根据ID查询管理员信息
-     *
-     * @param id 要查询的管理员账户ID
-     * @return 查询到的管理员对象
-     */
-    public Admin selectById(String id) {
-        return adminMapper.selectById(id);
-    }
-
-    /**
-     * 根据ID查询管理员信息
-     *
-     * @param id 要查询的管理员账户ID
-     * @return 查询到的管理员对象
-     */
-    @Override
-    public Admin selectById(Long id) {
-        return adminMapper.selectById(String.valueOf(id));
-    }
-
-    /**
-     * 根据ID查询管理员信息
-     *
-     * @param id 要查询的管理员账户ID
-     * @return 查询到的管理员对象
-     */
-    @Override
-    public Admin selectById(Integer id) {
-        return adminMapper.selectById(String.valueOf(id));
-    }
 
     /**
      * 查询所有管理员信息
@@ -133,6 +118,11 @@ public class AdminServiceImpl extends BaseServiceImpl<Admin, Integer, AdminMappe
     @Override
     public List<Admin> selectAll() {
         return adminMapper.selectAll(null);
+    }
+
+    @Override
+    public PageInfo<Admin> selectPage(Long pageNum, Long pageSize, Admin admin) {
+        return null;
     }
 
     /**
@@ -318,7 +308,7 @@ public class AdminServiceImpl extends BaseServiceImpl<Admin, Integer, AdminMappe
 
         // 创建token并返回给前端
         String token = TokenUtils.createToken(dbAdmin.getId() + "-" + "ADMIN", dbAdmin.getPassword());
-        dbAdmin.setToken(token);
+//        dbAdmin.setToken(token);
 
         // 返回登录成功的管理员对象
         return dbAdmin;
