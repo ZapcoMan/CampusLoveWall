@@ -3,8 +3,8 @@ package org.campuswall.springbootcampuslovewall.auth.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import jakarta.annotation.Resource;
-import org.campuswall.springbootcampuslovewall.auth.service.AccountService;
+import com.github.pagehelper.PageInfo;import jakarta.annotation.Resource;
+import org.campuswall.springbootcampuslovewall.admin.entity.Admin;import org.campuswall.springbootcampuslovewall.auth.service.AccountService;
 import org.campuswall.springbootcampuslovewall.common.core.service.impl.BaseServiceImpl;
 import org.campuswall.springbootcampuslovewall.common.enums.RoleEnum;
 import org.campuswall.springbootcampuslovewall.entity.Account;
@@ -24,7 +24,7 @@ import java.util.function.Function;
  * 实现了AccountService接口，用于处理普通用户账户相关的业务逻辑
  */
 @Service
-public class UserAccountServiceImpl extends BaseServiceImpl<Account, String, UserMapper> implements AccountService {
+public class UserAccountServiceImpl extends BaseServiceImpl<Account, Integer, UserMapper> implements AccountService {
 
     @Resource
     private UserService userService;
@@ -34,18 +34,10 @@ public class UserAccountServiceImpl extends BaseServiceImpl<Account, String, Use
     }
 
     @Override
-    public Account selectById(Long aLong) {
-        User user = userService.selectById(aLong);
-        if (user == null) {
-            return null;
-        }
-        Account account = new Account();
-        account.setId(Math.toIntExact(user.getId()));
-        account.setUsername(user.getUsername());
-        account.setPassword(user.getPassword());
-        account.setRole(user.getRole());
-        return account;
+    public Account selectById(Long id) {
+        return null;
     }
+
 
     @Override
     public RoleEnum getRole() {
@@ -53,8 +45,8 @@ public class UserAccountServiceImpl extends BaseServiceImpl<Account, String, Use
     }
 
     @Override
-    public Account selectById(String s) {
-        org.campuswall.springbootcampuslovewall.user.entity.User user = userService.selectById(Long.valueOf(s));
+    public Account selectById(Integer id) {
+        User user = userService.selectById(Long.valueOf(id));
         if (user == null) {
             return null;
         }
@@ -74,6 +66,11 @@ public class UserAccountServiceImpl extends BaseServiceImpl<Account, String, Use
     @Override
     public Account login(Account account) {
         return userService.login(account);
+    }
+
+    @Override
+    public Account selectById(String s) {
+        return null;
     }
 
     @Override
@@ -104,6 +101,11 @@ public class UserAccountServiceImpl extends BaseServiceImpl<Account, String, Use
     @Override
     public boolean updateById(Account entity) {
         return false;
+    }
+
+    @Override
+    public void deleteById(Integer integer) {
+
     }
 
     @Override
@@ -144,5 +146,8 @@ public class UserAccountServiceImpl extends BaseServiceImpl<Account, String, Use
     @Override
     public void deleteById(String s) {
 
+    }@Override
+    public PageInfo<Admin> selectPage(Integer pageNum, Integer pageSize, Admin admin) {
+        return null;
     }
 }
