@@ -55,7 +55,14 @@ public class AdminAccountServiceImpl extends BaseServiceImpl<Account, String, Ad
 
     @Override
     public Account selectById(Integer id) {
-        return null;
+        Admin admin = adminMapper.selectById(id);
+
+        Account account = new Account();
+        account.setId(Math.toIntExact(admin.getId()));
+        account.setUsername(admin.getUsername());
+        account.setPassword(admin.getPassword());
+        account.setRole(admin.getRole());
+        return account;
     }
 
     /**
@@ -66,7 +73,14 @@ public class AdminAccountServiceImpl extends BaseServiceImpl<Account, String, Ad
      */
     @Override
     public Account selectById(Long id) {
-        return null;
+        Admin admin = adminMapper.selectById(id);
+
+        Account account = new Account();
+        account.setId(Math.toIntExact(admin.getId()));
+        account.setUsername(admin.getUsername());
+        account.setPassword(admin.getPassword());
+        account.setRole(admin.getRole());
+        return account;
     }
 
     /**
