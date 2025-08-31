@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.campuswall.springbootcampuslovewall.common.core.mapper.BaseMapperPlus;
 import org.campuswall.springbootcampuslovewall.admin.entity.Admin;
+import org.campuswall.springbootcampuslovewall.entity.Account;
 
 import java.util.List;
 
@@ -69,6 +70,19 @@ public interface AdminMapper extends BaseMapperPlus<Admin, Integer> {
 //    @Select("select * from `admin` where id = #{id}")
 //    Admin selectById(Long id);
 
+    /**
+     * 根据ID更新管理员信息
+     *
+     * @param id 管理员ID
+     */
     void updateById(Long id);
+
+    /**
+     * 插入账户信息
+     *
+     * @param account 账户信息
+     */
+    void insert(Account account);
+
 }
 
