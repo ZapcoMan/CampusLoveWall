@@ -25,7 +25,7 @@ import java.util.function.Function;
  * 实现了AccountService接口，用于处理管理员账户相关的业务逻辑
  */
 @Service
-public class AdminAccountServiceImpl extends BaseServiceImpl<Account, String, AdminMapper> implements AccountService {
+public class AdminAccountServiceImpl extends BaseServiceImpl<Account, Integer, AdminMapper> implements AccountService {
 
 
     @Resource
@@ -35,80 +35,49 @@ public class AdminAccountServiceImpl extends BaseServiceImpl<Account, String, Ad
     private AdminService adminService;
 
     /**
-     * 构造函数，初始化管理员映射器
+     * 构造函数，初始化Mapper对象
      *
-     * @param adminMapper 管理员数据映射器
+     * @param mapper 数据访问层Mapper对象
      */
-    public AdminAccountServiceImpl(AdminMapper adminMapper) {
-        super(adminMapper);
+    public AdminAccountServiceImpl(AdminMapper mapper) {
+        super(mapper);
     }
 
+
     /**
-     * 获取角色枚举值
+     * 获取服务支持的角色
      *
-     * @return RoleEnum.ADMIN 管理员角色枚举
+     * @return RoleEnum类型，表示服务支持的角色
      */
     @Override
     public RoleEnum getRole() {
-        return RoleEnum.ADMIN;
-    }
-
-    @Override
-    public Account selectById(Integer id) {
-        Admin admin = adminMapper.selectById(id);
-
-        Account account = new Account();
-        account.setId(Math.toIntExact(admin.getId()));
-        account.setUsername(admin.getUsername());
-        account.setPassword(admin.getPassword());
-        account.setRole(admin.getRole());
-        return account;
+        return null;
     }
 
     /**
-     * 根据ID查询账户信息
+     * 根据主键ID查询实体对象
      *
-     * @param id 账户ID
-     * @return Account 账户信息
+     * @param id 主键ID（Long类型）
+     * @return 实体对象
      */
     @Override
     public Account selectById(Long id) {
-        Admin admin = adminMapper.selectById(id);
-
-        Account account = new Account();
-        account.setId(Math.toIntExact(admin.getId()));
-        account.setUsername(admin.getUsername());
-        account.setPassword(admin.getPassword());
-        account.setRole(admin.getRole());
-        return account;
+        return null;
     }
 
     /**
-     * 根据ID查询账户信息
+     * 根据账户ID选择账户信息
      *
-     * @param id 账户ID
-     * @return Account 账户信息
+     * @param id 账户的唯一标识符
+     * @return Account类型，表示查询到的账户信息
      */
     @Override
-    public Account selectById(String id) {
-        Admin admin = adminService.selectById(Long.valueOf(id));
-        Account account = new Account();
-        account.setId(Math.toIntExact(admin.getId()));
-        account.setUsername(admin.getUsername());
-        account.setPassword(admin.getPassword());
-        account.setRole(admin.getRole());
-        return account;
-    }
-
-    @Override
-    public void deleteById(Integer id) {
-
+    public Account selectById(Integer id) {
+        return null;
     }
 
     /**
-     * 查询所有账户信息
-     *
-     * @return List<Account> 账户信息列表
+     * @return
      */
     @Override
     public List<Account> selectAll() {
@@ -116,9 +85,9 @@ public class AdminAccountServiceImpl extends BaseServiceImpl<Account, String, Ad
     }
 
     /**
-     * 根据ID更新账户信息
+     * 根据主键ID更新实体对象
      *
-     * @param id 账户ID
+     * @param id 主键ID（Long类型）
      */
     @Override
     public void updateById(Long id) {
@@ -126,21 +95,17 @@ public class AdminAccountServiceImpl extends BaseServiceImpl<Account, String, Ad
     }
 
     /**
-     * 插入账户信息
-     *
-     * @param account 账户信息
+     * @param entity
      */
     @Override
-    public void insert(Account account) {
+    public void insert(Account entity) {
 
     }
 
     /**
-     * 批量保存账户信息
-     *
-     * @param entityList 账户信息集合
-     * @param batchSize  批处理大小
-     * @return boolean 是否保存成功
+     * @param entityList
+     * @param batchSize
+     * @return
      */
     @Override
     public boolean saveBatch(Collection<Account> entityList, int batchSize) {
@@ -148,11 +113,9 @@ public class AdminAccountServiceImpl extends BaseServiceImpl<Account, String, Ad
     }
 
     /**
-     * 批量保存或更新账户信息
-     *
-     * @param entityList 账户信息集合
-     * @param batchSize  批处理大小
-     * @return boolean 是否操作成功
+     * @param entityList
+     * @param batchSize
+     * @return
      */
     @Override
     public boolean saveOrUpdateBatch(Collection<Account> entityList, int batchSize) {
@@ -160,23 +123,18 @@ public class AdminAccountServiceImpl extends BaseServiceImpl<Account, String, Ad
     }
 
     /**
-     * 根据ID更新账户信息
-     *
-     * @param account 账户信息
-     * @return boolean 是否更新成功
+     * @param entity
+     * @return
      */
     @Override
-    public boolean updateById(Account account) {
-
+    public boolean updateById(Account entity) {
         return false;
     }
 
     /**
-     * 根据ID批量更新账户信息
-     *
-     * @param entityList 账户信息集合
-     * @param batchSize  批处理大小
-     * @return boolean 是否更新成功
+     * @param entityList
+     * @param batchSize
+     * @return
      */
     @Override
     public boolean updateBatchById(Collection<Account> entityList, int batchSize) {
@@ -184,10 +142,8 @@ public class AdminAccountServiceImpl extends BaseServiceImpl<Account, String, Ad
     }
 
     /**
-     * 保存或更新账户信息
-     *
-     * @param entity 账户信息
-     * @return boolean 是否操作成功
+     * @param entity
+     * @return
      */
     @Override
     public boolean saveOrUpdate(Account entity) {
@@ -195,11 +151,9 @@ public class AdminAccountServiceImpl extends BaseServiceImpl<Account, String, Ad
     }
 
     /**
-     * 根据查询条件获取单个账户信息
-     *
-     * @param queryWrapper 查询条件包装器
-     * @param throwEx      是否抛出异常
-     * @return Account 账户信息
+     * @param queryWrapper
+     * @param throwEx
+     * @return
      */
     @Override
     public Account getOne(Wrapper<Account> queryWrapper, boolean throwEx) {
@@ -207,10 +161,8 @@ public class AdminAccountServiceImpl extends BaseServiceImpl<Account, String, Ad
     }
 
     /**
-     * 根据查询条件获取Map格式结果
-     *
-     * @param queryWrapper 查询条件包装器
-     * @return Map<String, Object> 结果映射
+     * @param queryWrapper
+     * @return
      */
     @Override
     public Map<String, Object> getMap(Wrapper<Account> queryWrapper) {
@@ -218,12 +170,10 @@ public class AdminAccountServiceImpl extends BaseServiceImpl<Account, String, Ad
     }
 
     /**
-     * 根据查询条件和映射函数获取对象
-     *
-     * @param queryWrapper 查询条件包装器
-     * @param mapper       映射函数
-     * @param <V>          返回值类型
-     * @return V 映射后的结果
+     * @param queryWrapper
+     * @param mapper
+     * @param <V>
+     * @return
      */
     @Override
     public <V> V getObj(Wrapper<Account> queryWrapper, Function<? super Object, V> mapper) {
@@ -231,9 +181,7 @@ public class AdminAccountServiceImpl extends BaseServiceImpl<Account, String, Ad
     }
 
     /**
-     * 获取基础映射器
-     *
-     * @return BaseMapper<Account> 基础映射器
+     * @return
      */
     @Override
     public BaseMapper<Account> getBaseMapper() {
@@ -241,9 +189,7 @@ public class AdminAccountServiceImpl extends BaseServiceImpl<Account, String, Ad
     }
 
     /**
-     * 获取实体类类型
-     *
-     * @return Class<Account> 实体类类型
+     * @return
      */
     @Override
     public Class<Account> getEntityClass() {
@@ -251,54 +197,44 @@ public class AdminAccountServiceImpl extends BaseServiceImpl<Account, String, Ad
     }
 
     /**
-     * 根据ID删除账户信息
-     *
-     * @param id 账户ID
+     * @param integer
      */
     @Override
-    public void deleteById(String id) {
+    public void deleteById(Integer integer) {
 
     }
 
+    /**
+     * 分页查询管理员信息列表
+     *
+     * @param pageNum  页码
+     * @param pageSize 每页大小
+     * @param admin    查询条件对象
+     * @return 分页信息对象
+     */
     @Override
     public PageInfo<Admin> selectPage(Integer pageNum, Integer pageSize, Admin admin) {
         return null;
     }
 
     /**
-     * 管理员登录验证
+     * 更新账户的密码
      *
-     * @param account 包含用户名和密码的账户信息
-     * @return Account 登录成功的账户信息
-     */
-    @Override
-    public Account login(Account account) {
-        Admin admin = adminService.login(account);
-        Account accounts = new Account();
-        accounts.setId(Math.toIntExact(admin.getId()));
-        accounts.setUsername(admin.getUsername());
-        accounts.setPassword(admin.getPassword());
-        accounts.setRole(admin.getRole());
-        return accounts;
-    }
-
-//    /**
-//     * 管理员注册
-//     *
-//     * @param user 用户信息
-//     */
-//    @Override
-//    public void register(User user) {
-//        AccountService.super.register(user);
-//    }
-
-    /**
-     * 更新管理员密码
-     *
-     * @param account 包含新密码信息的账户对象
+     * @param account 包含新密码的账户对象
      */
     @Override
     public void updatePassword(Account account) {
-        adminService.updatePassword(account);
+
+    }
+
+    /**
+     * 登录操作，验证账户信息
+     *
+     * @param account 包含登录信息的账户对象
+     * @return Account类型，表示登录成功的账户信息
+     */
+    @Override
+    public Account login(Account account) {
+        return null;
     }
 }
