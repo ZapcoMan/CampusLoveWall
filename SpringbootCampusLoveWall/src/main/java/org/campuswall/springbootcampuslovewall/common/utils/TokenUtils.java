@@ -8,6 +8,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
+import org.campuswall.springbootcampuslovewall.admin.entity.Admin;
 import org.campuswall.springbootcampuslovewall.entity.Account;
 import org.campuswall.springbootcampuslovewall.admin.service.impl.AdminServiceImpl;
 import org.springframework.stereotype.Component;
@@ -72,8 +73,15 @@ public class TokenUtils {
         String userId = split[0];
         String role = split[1];
         if ("ADMIN".equals(role)) {
-            return staticAdminServiceImpl.selectById(userId);
+            Admin admin =  staticAdminServiceImpl.selectById(Long.valueOf(userId));
+            Account account = new Account();
+//            account.setId();
+            account.setUsername(admin.getUsername());
+            account.setRole(admin.getRole());
+            account.setPassword(admin.getPassword());
+            return account;
         }
+
 //        } else if ("USER".equals(role)) {
 //            return staticUserServiceImpl.selectById(userId);
 //        }
