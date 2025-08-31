@@ -98,7 +98,7 @@ public class AdminAccountServiceImpl extends BaseServiceImpl<Account, Integer, A
      * @param entity
      */
     @Override
-    public void insert(Account entity) {
+    public void insert(Account account) {
 
     }
 
@@ -108,7 +108,7 @@ public class AdminAccountServiceImpl extends BaseServiceImpl<Account, Integer, A
      * @return
      */
     @Override
-    public boolean saveBatch(Collection<Account> entityList, int batchSize) {
+    public boolean saveBatch(Collection<Account> accountList, int batchSize) {
         return false;
     }
 
@@ -118,7 +118,7 @@ public class AdminAccountServiceImpl extends BaseServiceImpl<Account, Integer, A
      * @return
      */
     @Override
-    public boolean saveOrUpdateBatch(Collection<Account> entityList, int batchSize) {
+    public boolean saveOrUpdateBatch(Collection<Account> accountList, int batchSize) {
         return false;
     }
 
@@ -127,7 +127,7 @@ public class AdminAccountServiceImpl extends BaseServiceImpl<Account, Integer, A
      * @return
      */
     @Override
-    public boolean updateById(Account entity) {
+    public boolean updateById(Account account) {
         return false;
     }
 
@@ -137,7 +137,7 @@ public class AdminAccountServiceImpl extends BaseServiceImpl<Account, Integer, A
      * @return
      */
     @Override
-    public boolean updateBatchById(Collection<Account> entityList, int batchSize) {
+    public boolean updateBatchById(Collection<Account> accountList, int batchSize) {
         return false;
     }
 
