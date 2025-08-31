@@ -95,7 +95,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             AccountService service = serviceMap.get(role);
             if (service == null) throw new CustomerException("401", "非法角色");
 
-            Account account = service.selectById(userId);
+            Account account = service.selectById(Integer.valueOf(userId));
             if (account == null) throw new CustomerException("401", "用户不存在");
 
             // 使用账户密码作为签名密钥验证token
