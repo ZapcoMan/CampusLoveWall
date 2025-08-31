@@ -3,7 +3,9 @@ package org.campuswall.springbootcampuslovewall.user.service.impl;
 import cn.hutool.crypto.digest.DigestUtil;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.github.pagehelper.PageInfo;
 import jakarta.annotation.Resource;
+import org.campuswall.springbootcampuslovewall.admin.entity.Admin;
 import org.campuswall.springbootcampuslovewall.common.core.service.impl.BaseServiceImpl;
 import org.campuswall.springbootcampuslovewall.common.exception.CustomerException;
 import org.campuswall.springbootcampuslovewall.common.utils.TokenUtils;
@@ -56,6 +58,16 @@ public class UserServiceImpl extends BaseServiceImpl<User, Long, UserMapper> imp
     @Override
     public User selectById(Long id) {
         return userMapper.selectById(id);
+    }
+
+    /**
+     * 根据主键ID删除实体对象
+     *
+     * @param id 主键ID（Integer类型）
+     */
+    @Override
+    public void deleteById(Integer id) {
+
     }
 
     @Override
@@ -225,5 +237,18 @@ public class UserServiceImpl extends BaseServiceImpl<User, Long, UserMapper> imp
     @Override
     public void deleteById(Long id) {
         userMapper.deleteById(id);
+    }
+
+    /**
+     * 分页查询管理员信息列表
+     *
+     * @param pageNum  页码
+     * @param pageSize 每页大小
+     * @param admin    查询条件对象
+     * @return 分页信息对象
+     */
+    @Override
+    public PageInfo<Admin> selectPage(Integer pageNum, Integer pageSize, Admin admin) {
+        return null;
     }
 }
