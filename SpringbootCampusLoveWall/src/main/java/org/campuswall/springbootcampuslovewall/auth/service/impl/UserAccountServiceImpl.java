@@ -116,7 +116,7 @@ public class UserAccountServiceImpl extends BaseServiceImpl<User, Integer, UserM
      */
     @Override
     public void resetPassword(String email) {
-
+        throw new UnsupportedOperationException("功能未实现");
     }
 
     /**
@@ -155,7 +155,7 @@ public class UserAccountServiceImpl extends BaseServiceImpl<User, Integer, UserM
      */
     @Override
     public void updateById(Long id) {
-
+        throw new UnsupportedOperationException("功能未实现");
     }
 
     /**
@@ -192,7 +192,7 @@ public class UserAccountServiceImpl extends BaseServiceImpl<User, Integer, UserM
      */
     @Override
     public void insert(User user) {
-
+        throw new UnsupportedOperationException("功能未实现");
     }
 
     /**
@@ -273,8 +273,8 @@ public class UserAccountServiceImpl extends BaseServiceImpl<User, Integer, UserM
      * @param integer 主键ID（Integer类型）
      */
     @Override
-    public void deleteById(Integer integer) {
-
+    public void deleteById(Integer id) {
+        throw new UnsupportedOperationException("功能未实现");
     }
 
     /**
