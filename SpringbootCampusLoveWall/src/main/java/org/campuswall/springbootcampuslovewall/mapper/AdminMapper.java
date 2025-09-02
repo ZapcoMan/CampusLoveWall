@@ -24,6 +24,7 @@ public interface AdminMapper extends BaseMapperPlus<Admin, Integer> {
      * @param admin 一个Admin对象，用于传递查询条件（本例中未使用）
      * @return 包含所有管理员的列表
      */
+    @Select("select * from `sys_admin`")
     List<Admin> selectAll(Admin admin);
 
     /**
