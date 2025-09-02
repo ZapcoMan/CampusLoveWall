@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import java.util.List;
 
 /**
- * 自定义基础Service接口，适用于所有实体。
+ * 抽象服务接口，定义通用数据操作。
  *
  * @param <T>  实体类
  * @param <ID> 主键类型

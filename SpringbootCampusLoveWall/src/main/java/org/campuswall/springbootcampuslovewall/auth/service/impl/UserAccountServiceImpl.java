@@ -1,17 +1,16 @@
 package org.campuswall.springbootcampuslovewall.auth.service.impl;
 
 
+import cn.hutool.crypto.digest.DigestUtil;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.github.pagehelper.PageInfo;
 import jakarta.annotation.Resource;
-import org.campuswall.springbootcampuslovewall.admin.entity.Admin;
 import org.campuswall.springbootcampuslovewall.auth.service.AccountService;
 import org.campuswall.springbootcampuslovewall.common.core.service.impl.BaseServiceImpl;
 import org.campuswall.springbootcampuslovewall.common.enums.RoleEnum;
-import org.campuswall.springbootcampuslovewall.entity.Account;
+import org.campuswall.springbootcampuslovewall.common.exception.CustomerException;
 import org.campuswall.springbootcampuslovewall.mapper.UserMapper;
-
 import org.campuswall.springbootcampuslovewall.user.entity.User;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +24,7 @@ import java.util.function.Function;
  * 实现了AccountService接口，用于处理普通用户账户相关的业务逻辑
  */
 @Service
-public class UserAccountServiceImpl extends BaseServiceImpl<User, Integer, UserMapper> implements AccountService<User,Integer> {
+public class UserAccountServiceImpl extends BaseServiceImpl<User, Integer, UserMapper> implements AccountService<User, Integer> {
 
     @Resource
     private UserMapper userMapper;
@@ -61,32 +60,53 @@ public class UserAccountServiceImpl extends BaseServiceImpl<User, Integer, UserM
     /**
      * 账户登录
      *
-     * @param entity 账户信息
+     * @param user 账户信息
      * @return T 登录成功的账户对象
      */
     @Override
-    public User login(User entity) {
-        return null;
+    public User login(User user) {
+        // 1) 查用户
+        User dbUser = userMapper.findByUsername(user.getUsername());
+        if (dbUser == null) {
+            throw new CustomerException("账号不存在");
+        }
+
+        // 2) 密码校验（你现有逻辑使用 md5）
+        String inputHash = DigestUtil.md5Hex(user.getPassword() == null ? "" : user.getPassword());
+        if (!inputHash.equals(dbUser.getPassword())) {
+            throw new CustomerException("账号或密码错误");
+        }
+
+        // 3) 成功：返回域对象（Controller 负责生成 token / 转 DTO）
+        return dbUser;
     }
 
     /**
      * 更新账户密码
      *
-     * @param entity 包含密码信息的账户对象
+     * @param user 包含密码信息的账户对象
      */
     @Override
-    public void updatePassword(User entity) {
-
+    public void updatePassword(User user) {
+        if (user == null || user.getId() == null) throw new CustomerException("参数错误");
+        String hash = DigestUtil.md5Hex(user.getPassword());
+        userMapper.updatePasswordById(user.getId(), hash);
     }
 
     /**
      * 注册新账户
      *
-     * @param entity 用户对象
+     * @param user 用户对象
      */
     @Override
-    public void register(User entity) {
-
+    public void register(User user) {
+        if (user == null) throw new CustomerException("参数错误");
+        // 简单示例：校验 username 唯一 -> 散列密码 -> 插入
+        if (userMapper.findByUsername(user.getUsername()) != null) {
+            throw new CustomerException("用户名已存在");
+        }
+        user.setPassword(DigestUtil.md5Hex(user.getPassword()));
+        userMapper.insert(user);
     }
 
     /**
@@ -106,7 +126,8 @@ public class UserAccountServiceImpl extends BaseServiceImpl<User, Integer, UserM
      */
     @Override
     public void lockAccount(Integer integer) {
-
+        // 需要邮件 验证码系统 这里留为实现占位
+        throw new UnsupportedOperationException("功能未实现");
     }
 
     /**
@@ -116,7 +137,7 @@ public class UserAccountServiceImpl extends BaseServiceImpl<User, Integer, UserM
      */
     @Override
     public void unlockAccount(Integer integer) {
-
+        throw new UnsupportedOperationException("功能未实现");
     }
 
     /**
@@ -138,67 +159,67 @@ public class UserAccountServiceImpl extends BaseServiceImpl<User, Integer, UserM
     }
 
     /**
-     * @param entity
+     * @param user
      * @return
      */
     @Override
-    public boolean save(User entity) {
+    public boolean save(User user) {
         return false;
     }
 
     /**
-     * @param entityList
+     * @param userList
      * @param batchSize
      * @return
      */
     @Override
-    public boolean saveBatch(Collection<User> entityList, int batchSize) {
+    public boolean saveBatch(Collection<User> userList, int batchSize) {
         return false;
     }
 
     /**
-     * @param entityList
+     * @param userList
      * @param batchSize
      * @return
      */
     @Override
-    public boolean saveOrUpdateBatch(Collection<User> entityList, int batchSize) {
+    public boolean saveOrUpdateBatch(Collection<User> userList, int batchSize) {
         return false;
     }
 
     /**
-     * @param entity
+     * @param user
      */
     @Override
-    public void insert(User entity) {
+    public void insert(User user) {
 
     }
 
     /**
-     * @param entity
+     * @param user
      * @return
      */
     @Override
-    public boolean updateById(User entity) {
+    public boolean updateById(User user) {
         return false;
     }
 
     /**
-     * @param entityList
+     * @param userList
      * @param batchSize
      * @return
      */
     @Override
-    public boolean updateBatchById(Collection<User> entityList, int batchSize) {
+    public boolean updateBatchById(Collection<User> userList, int batchSize) {
         return false;
     }
 
     /**
-     * @param entity
+     * @param user
      * @return
      */
     @Override
-    public boolean saveOrUpdate(User entity) {
+    public boolean saveOrUpdate(User user) {
         return false;
     }
 
@@ -261,11 +282,11 @@ public class UserAccountServiceImpl extends BaseServiceImpl<User, Integer, UserM
      *
      * @param pageNum  页码
      * @param pageSize 每页大小
-     * @param entity   查询条件对象
+     * @param user     查询条件对象
      * @return 分页信息对象
      */
     @Override
-    public PageInfo<User> selectPage(Integer pageNum, Integer pageSize, User entity) {
+    public PageInfo<User> selectPage(Integer pageNum, Integer pageSize, User user) {
         return null;
     }
 

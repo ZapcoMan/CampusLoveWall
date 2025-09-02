@@ -31,11 +31,10 @@ public class AuthController {
         for (AccountService service : accountServices) {
             serviceMap.put(service.getRole().getCode(), service);
             log.info("初始化角色：{}", service.getRole().getCode());
-            if (service.getRole() != null) {
-                serviceMap.put(service.getRole().getCode(), service);
-            }
+            serviceMap.put(service.getRole().getCode(), service);
         }
     }
+
 
     @PostMapping("/login")
     public R<Account> login(@RequestBody Account account) {
