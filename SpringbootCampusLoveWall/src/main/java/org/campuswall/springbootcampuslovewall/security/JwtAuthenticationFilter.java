@@ -72,63 +72,92 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                                     FilterChain filterChain) throws ServletException, IOException {
 
         String uri = request.getRequestURI();
+        log.debug("请求URI: {}", uri);
         for (String white : WHITE_LIST) {
             if (uri.startsWith(white)) {
+                log.debug("白名单路径，跳过JWT验证: {}", uri);
                 filterChain.doFilter(request, response);
                 return;
             }
         }
 
         String token = request.getHeader("token");
-        log.info("JwtAuthenticationFilter 获取 的 token: {}", token);
         if (StrUtil.isEmpty(token)) token = request.getParameter("token");
         if (StrUtil.isBlank(token)) {
+            log.debug("未找到token，继续过滤器链");
             filterChain.doFilter(request, response);
             return;
         }
 
+        log.debug("获取到的token: {}", token);
+
         try {
             String[] split = JWT.decode(token).getAudience().get(0).split("-");
-            Integer userId = Integer.parseInt(split[0]);
+            log.debug("token-split信息: {}", split);
+//            Integer userId = Integer.parseInt(split[0]);
+            Integer userId = Integer.valueOf(split[0]);
             String role = split[1];
 
+            log.debug("解析token信息 - 用户ID: {}, 角色: {}", userId, role);
+
             AccountService<Object, Integer> service = (AccountService<Object, Integer>) serviceMap.get(role);
-            if (service == null) throw new CustomerException("非法角色");
+            if (service == null) {
+                log.warn("未找到角色对应的服务: {}", role);
+                throw new CustomerException("非法角色");
+            }
 
             Object domain = service.selectById(userId);
-            if (domain == null) throw new CustomerException("用户不存在");
+            if (domain == null) {
+                log.warn("未找到用户，ID: {}", userId);
+                throw new CustomerException("用户不存在");
+            }
 
             AccountConvertStrategy<?> strategy = strategyMap.get(role);
-            if (strategy == null) throw new CustomerException("未找到转换策略");
+            if (strategy == null) {
+                log.warn("未找到角色对应的转换策略: {}", role);
+                throw new CustomerException("未找到转换策略");
+            }
 
             Account account = convertDomainWithStrategy(domain, strategy);
+            log.debug("转换后的账户信息: username={}, role={}", account.getUsername(), account.getRole());
 
             // 验证 token
+            log.debug("开始验证token，使用密码: {}", account.getPassword());
             JWTVerifier verifier = JWT.require(Algorithm.HMAC256(account.getPassword())).build();
             verifier.verify(token);
+            log.debug("token验证成功");
 
             // 设置Spring Security认证信息
             UsernamePasswordAuthenticationToken authToken =
                     new UsernamePasswordAuthenticationToken(account.getUsername(), null, Collections.emptyList());
             SecurityContextHolder.getContext().setAuthentication(authToken);
+            log.debug("Spring Security认证信息设置完成");
 
             // 自动续签
             if (shouldRenewToken(token, 30 * 60 * 1000)) {
+                log.debug("token需要续签");
                 String newToken = createToken(account.getId() + "-" + account.getRole(),
                         account.getPassword(), 24);
                 response.setHeader("Renew-Token", newToken);
+                log.debug("已生成新的token并设置到响应头");
             }
 
         } catch (CustomerException e) {
+            log.warn("自定义异常: {}", e.getMessage());
             response.setStatus(401);
             response.getWriter().write(e.getMessage());
             return;
         } catch (Exception e) {
             log.error("JWT验证失败", e);
+            response.setStatus(401);
+            response.getWriter().write("JWT验证失败");
+            return;
         }
 
+        log.debug("继续执行过滤器链");
         filterChain.doFilter(request, response);
     }
+
 
     /**
      * 使用指定策略将领域对象转换为Account对象
