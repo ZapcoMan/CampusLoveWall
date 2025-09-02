@@ -37,4 +37,5 @@ public interface UserMapper extends BaseMapperPlus<User, Integer> {
      * @param hash 经过加密的密码字符串
      */
     void updatePasswordById(Long id, String hash);
+
 }
