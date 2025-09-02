@@ -88,5 +88,13 @@ public interface AdminMapper extends BaseMapperPlus<Admin, Integer> {
     @Insert("insert into sys_admin(username,password) values(#{username},#{password})")
     boolean save(Admin admin);
 
+
+    /**
+     * 根据用户ID更新密码
+     *
+     * @param id 用户ID
+     * @param hash 经过加密的密码字符串
+     */
+    void updatePasswordById(Long id, String hash);
 }
 
