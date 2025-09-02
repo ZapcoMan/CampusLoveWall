@@ -46,7 +46,7 @@ public class AdminAccountServiceImpl extends BaseServiceImpl<Admin, Integer, Adm
      */
     @Override
     public RoleEnum getRole() {
-        return null;
+        return RoleEnum.ADMIN;
     }
 
     /**
