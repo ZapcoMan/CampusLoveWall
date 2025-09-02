@@ -1,7 +1,9 @@
 package org.campuswall.springbootcampuslovewall;
 
+import cn.hutool.crypto.digest.DigestUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.campuswall.springbootcampuslovewall.entity.Account;
+import org.campuswall.springbootcampuslovewall.user.entity.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -70,4 +72,7 @@ public class AuthControllerTest {
                 .andExpect(jsonPath("$.code").value(500))
                 .andExpect(jsonPath("$.message").value("不支持的角色类型"));
     }
+
+
+
 }
