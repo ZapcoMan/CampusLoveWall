@@ -11,16 +11,16 @@ import java.util.List;
  * @param <ID> 主键类型
  */
 public interface BaseService<T, ID> extends IService<T> {
+    boolean save(T entity);
+    void insert(T entity);
 
+    void deleteById(ID id);
+    boolean updateById(T entity);
     T selectById(ID id);
 
     List<T> selectAll();
 
-    void insert(T entity);
 
-    boolean save(T entity);
 
-    boolean updateById(T entity);
 
-    void deleteById(ID id);
 }
