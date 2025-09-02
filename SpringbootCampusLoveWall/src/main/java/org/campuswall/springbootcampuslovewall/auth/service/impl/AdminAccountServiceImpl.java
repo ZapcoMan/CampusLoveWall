@@ -1,19 +1,18 @@
 package org.campuswall.springbootcampuslovewall.auth.service.impl;
 
 
+import cn.hutool.crypto.digest.DigestUtil;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.github.pagehelper.PageInfo;
 import jakarta.annotation.Resource;
 import org.campuswall.springbootcampuslovewall.admin.entity.Admin;
+import org.campuswall.springbootcampuslovewall.auth.service.AccountService;
 import org.campuswall.springbootcampuslovewall.common.core.service.impl.BaseServiceImpl;
 import org.campuswall.springbootcampuslovewall.common.enums.RoleEnum;
-import org.campuswall.springbootcampuslovewall.entity.Account;
+import org.campuswall.springbootcampuslovewall.common.exception.CustomerException;
 import org.campuswall.springbootcampuslovewall.mapper.AdminMapper;
-import org.campuswall.springbootcampuslovewall.auth.service.AccountService;
-import org.campuswall.springbootcampuslovewall.admin.service.AdminService;
 import org.springframework.stereotype.Service;
-
 
 import java.util.Collection;
 import java.util.List;
@@ -64,32 +63,51 @@ public class AdminAccountServiceImpl extends BaseServiceImpl<Admin, Integer, Adm
     /**
      * 账户登录
      *
-     * @param entity 账户信息
+     * @param admin 账户信息
      * @return T 登录成功的账户对象
      */
     @Override
     public Admin login(Admin admin) {
-        return null;
+        if (admin == null) throw new CustomerException("参数为空");
+        // 1) 查管理员
+        Admin dbAdmin = adminMapper.selectByUsername(admin.getUsername());
+        if (dbAdmin == null) {
+            throw new CustomerException("账号不存在");
+        }
+
+        // 2) 密码校验（用 md5）
+        String inputHash = DigestUtil.md5Hex(admin.getPassword() == null ? "" : admin.getPassword());
+        if (!inputHash.equals(dbAdmin.getPassword())) {
+            throw new CustomerException("账号或密码错误");
+        }
+
+        // 3) 可插入额外校验：是否启用、是否需要二步验证等
+        // if (!"ACTIVE".equals(dbAdmin.getStatus())) throw new CustomerException("管理员被锁定");
+
+        return dbAdmin;
     }
 
     /**
      * 更新账户密码
      *
-     * @param entity 包含密码信息的账户对象
+     * @param admin 包含密码信息的账户对象
      */
     @Override
-    public void updatePassword(Admin entity) {
-
+    public void updatePassword(Admin admin) {
+        if (admin == null || admin.getId() == null) throw new CustomerException("参数错误");
+        String hash = DigestUtil.md5Hex(admin.getPassword());
+        adminMapper.updatePasswordById(admin.getId(), hash);
     }
 
     /**
      * 注册新账户
      *
-     * @param entity 用户对象
+     * @param admin 用户对象
      */
     @Override
-    public void register(Admin entity) {
-
+    public void register(Admin admin) {
+        // 管理员注册通常受限 -> 默认不允许
+        throw new UnsupportedOperationException("管理员注册不支持");
     }
 
     /**
@@ -99,7 +117,7 @@ public class AdminAccountServiceImpl extends BaseServiceImpl<Admin, Integer, Adm
      */
     @Override
     public void resetPassword(String email) {
-
+        throw new UnsupportedOperationException("功能未实现");
     }
 
     /**
@@ -109,7 +127,7 @@ public class AdminAccountServiceImpl extends BaseServiceImpl<Admin, Integer, Adm
      */
     @Override
     public void lockAccount(Integer integer) {
-
+        throw new UnsupportedOperationException("功能未实现");
     }
 
     /**
@@ -119,7 +137,7 @@ public class AdminAccountServiceImpl extends BaseServiceImpl<Admin, Integer, Adm
      */
     @Override
     public void unlockAccount(Integer integer) {
-
+        throw new UnsupportedOperationException("功能未实现");
     }
 
     /**
@@ -139,71 +157,71 @@ public class AdminAccountServiceImpl extends BaseServiceImpl<Admin, Integer, Adm
      */
     @Override
     public void updateById(Long id) {
-
+        throw new UnsupportedOperationException("功能未实现");
     }
 
     /**
-     * @param entity
+     * @param admin
      * @return
      */
     @Override
-    public boolean save(Admin entity) {
+    public boolean save(Admin admin) {
         return false;
     }
 
     /**
-     * @param entityList
+     * @param adminList
      * @param batchSize
      * @return
      */
     @Override
-    public boolean saveBatch(Collection<Admin> entityList, int batchSize) {
+    public boolean saveBatch(Collection<Admin> adminList, int batchSize) {
         return false;
     }
 
     /**
-     * @param entityList
+     * @param adminList
      * @param batchSize
      * @return
      */
     @Override
-    public boolean saveOrUpdateBatch(Collection<Admin> entityList, int batchSize) {
+    public boolean saveOrUpdateBatch(Collection<Admin> adminList, int batchSize) {
         return false;
     }
 
     /**
-     * @param entity
+     * @param admin
      */
     @Override
-    public void insert(Admin entity) {
-
+    public void insert(Admin admin) {
+        throw new UnsupportedOperationException("功能未实现");
     }
 
     /**
-     * @param entity
+     * @param admin
      * @return
      */
     @Override
-    public boolean updateById(Admin entity) {
+    public boolean updateById(Admin admin) {
         return false;
     }
 
     /**
-     * @param entityList
+     * @param adminList
      * @param batchSize
      * @return
      */
     @Override
-    public boolean updateBatchById(Collection<Admin> entityList, int batchSize) {
+    public boolean updateBatchById(Collection<Admin> adminList, int batchSize) {
         return false;
     }
 
     /**
-     * @param entity
+     * @param admin
      * @return
      */
     @Override
-    public boolean saveOrUpdate(Admin entity) {
+    public boolean saveOrUpdate(Admin admin) {
         return false;
     }
 
@@ -254,11 +272,11 @@ public class AdminAccountServiceImpl extends BaseServiceImpl<Admin, Integer, Adm
     }
 
     /**
-     * @param integer
+     * @param id
      */
     @Override
-    public void deleteById(Integer integer) {
-
+    public void deleteById(Integer id) {
+        throw new UnsupportedOperationException("功能未实现");
     }
 
     /**
@@ -266,11 +284,11 @@ public class AdminAccountServiceImpl extends BaseServiceImpl<Admin, Integer, Adm
      *
      * @param pageNum  页码
      * @param pageSize 每页大小
-     * @param entity   查询条件对象
+     * @param admin   查询条件对象
      * @return 分页信息对象
      */
     @Override
-    public PageInfo<Admin> selectPage(Integer pageNum, Integer pageSize, Admin entity) {
+    public PageInfo<Admin> selectPage(Integer pageNum, Integer pageSize, Admin admin) {
         return null;
     }
 
