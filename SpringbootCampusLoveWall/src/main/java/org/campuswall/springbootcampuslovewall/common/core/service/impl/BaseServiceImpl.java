@@ -1,5 +1,6 @@
 package org.campuswall.springbootcampuslovewall.common.core.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageInfo;
 import org.campuswall.springbootcampuslovewall.admin.entity.Admin;
 import org.campuswall.springbootcampuslovewall.common.core.service.BaseService;
@@ -13,7 +14,7 @@ import java.util.List;
  * @param <ID> 主键类型
  * @param <M>  Mapper 类型
  */
-public abstract class BaseServiceImpl<T, ID, M> implements BaseService<T, ID> {
+public abstract class BaseServiceImpl<T, ID, M>  implements BaseService<T, ID> {
 
     protected final M mapper;
 
@@ -95,8 +96,8 @@ public abstract class BaseServiceImpl<T, ID, M> implements BaseService<T, ID> {
      *
      * @param pageNum  页码
      * @param pageSize 每页大小
-     * @param admin    查询条件对象
+     * @param entity    查询条件对象
      * @return 分页信息对象
      */
-    public abstract PageInfo<Admin> selectPage(Integer pageNum, Integer pageSize, Admin admin);
+    public abstract PageInfo<T> selectPage(Integer pageNum, Integer pageSize, T entity);
 }
