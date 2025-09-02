@@ -25,7 +25,7 @@ import java.util.function.Function;
  * 实现了AccountService接口，用于处理普通用户账户相关的业务逻辑
  */
 @Service
-public class UserAccountServiceImpl extends BaseServiceImpl<User, Integer, UserMapper> implements AccountService<User> {
+public class UserAccountServiceImpl extends BaseServiceImpl<User, Integer, UserMapper> implements AccountService<User,Integer> {
 
     @Resource
     private UserMapper userMapper;
@@ -40,17 +40,6 @@ public class UserAccountServiceImpl extends BaseServiceImpl<User, Integer, UserM
     }
 
     /**
-     * 根据主键ID查询实体对象
-     *
-     * @param id 主键ID（Long类型）
-     * @return 实体对象
-     */
-    @Override
-    public User selectById(Long id) {
-        return null;
-    }
-
-    /**
      * 获取账户角色枚举
      *
      * @return RoleEnum 角色枚举值
@@ -61,7 +50,7 @@ public class UserAccountServiceImpl extends BaseServiceImpl<User, Integer, UserM
     }
 
     /**
-     * @param integer 账户ID
+     * @param integer
      * @return
      */
     @Override
@@ -72,31 +61,31 @@ public class UserAccountServiceImpl extends BaseServiceImpl<User, Integer, UserM
     /**
      * 账户登录
      *
-     * @param account 账户信息
+     * @param entity 账户信息
      * @return T 登录成功的账户对象
      */
     @Override
-    public User login(User account) {
+    public User login(User entity) {
         return null;
     }
 
     /**
      * 更新账户密码
      *
-     * @param account 包含密码信息的账户对象
+     * @param entity 包含密码信息的账户对象
      */
     @Override
-    public void updatePassword(User account) {
+    public void updatePassword(User entity) {
 
     }
 
     /**
      * 注册新账户
      *
-     * @param account 用户对象
+     * @param entity 用户对象
      */
     @Override
-    public void register(User account) {
+    public void register(User entity) {
 
     }
 
@@ -113,20 +102,20 @@ public class UserAccountServiceImpl extends BaseServiceImpl<User, Integer, UserM
     /**
      * 锁定账户
      *
-     * @param id 账户ID
+     * @param integer 账户ID
      */
     @Override
-    public void lockAccount(Integer id) {
+    public void lockAccount(Integer integer) {
 
     }
 
     /**
      * 解锁账户
      *
-     * @param id 账户ID
+     * @param integer 账户ID
      */
     @Override
-    public void unlockAccount(Integer id) {
+    public void unlockAccount(Integer integer) {
 
     }
 
