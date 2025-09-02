@@ -31,15 +31,15 @@ public abstract class BaseServiceImpl<T, ID, M>  implements BaseService<T, ID> {
      * @param id 主键ID（Long类型）
      * @return 实体对象
      */
-    public abstract T selectById(Long id);
+    public abstract T selectById(ID id);
 
-    @Override
     /**
      * 根据主键ID查询实体对象
      *
      * @param id 主键ID
      * @return 实体对象
      */
+    @Override
     public abstract T selectById(ID id);
 
     /**
@@ -47,14 +47,16 @@ public abstract class BaseServiceImpl<T, ID, M>  implements BaseService<T, ID> {
      *
      * @param id 主键ID（Integer类型）
      */
-    public abstract void deleteById(Integer id);
+    public abstract void deleteById(ID id);
 
-    @Override
+//    public abstract void deleteById(Integer id);
+
     /**
      * 查询所有实体对象列表
      *
      * @return 实体对象列表
      */
+    @Override
     public abstract List<T> selectAll();
 
     /**
