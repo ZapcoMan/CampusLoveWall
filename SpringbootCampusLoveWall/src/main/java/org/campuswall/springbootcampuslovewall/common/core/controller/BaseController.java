@@ -5,8 +5,6 @@ import org.campuswall.springbootcampuslovewall.common.core.service.BaseService;
 import org.campuswall.springbootcampuslovewall.common.result.R;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 /**
  * 基础控制器类
  * 提供通用的RESTful CRUD操作，所有具体的控制器可以继承此类以获得基本的增删改查功能
@@ -36,15 +34,15 @@ public abstract class BaseController<T, ID> {
         return R.success(baseService.selectById(id));
     }
 
-    /**
-     * 查询所有实体
-     * @return 包含所有实体列表的响应对象
-     */
-    @Operation(summary = "查询全部")
-    @GetMapping
-    public R<List<T>> getAll() {
-        return R.success(baseService.selectAll());
-    }
+//    /**
+//     * 查询所有实体
+//     * @return 包含所有实体列表的响应对象
+//     */
+//    @Operation(summary = "查询全部")
+//    @GetMapping
+//    public R<List<T>> getAll() {
+//        return R.success(baseService.selectAll());
+//    }
 
     /**
      * 创建新实体
