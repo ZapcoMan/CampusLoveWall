@@ -1,8 +1,11 @@
 package org.campuswall.springbootcampuslovewall.user.service;
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import org.campuswall.springbootcampuslovewall.common.core.service.BaseService;
 import org.campuswall.springbootcampuslovewall.entity.Account;
 import org.campuswall.springbootcampuslovewall.user.entity.User;
+
+import java.util.List;
 
 
 public interface UserService extends BaseService<User, Long> {
@@ -28,4 +31,7 @@ public interface UserService extends BaseService<User, Long> {
      * @param account 账户信息
      */
     void updatePassword(Account account);
+
+
+
 }
