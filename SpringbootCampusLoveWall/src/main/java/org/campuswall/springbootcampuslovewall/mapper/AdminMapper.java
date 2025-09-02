@@ -40,7 +40,7 @@ public interface AdminMapper extends BaseMapperPlus<Admin, Integer> {
      * @param username 管理员的用户名，用于查询
      * @return 对应用户名的管理员对象，如果不存在则返回null
      */
-    @Select("select * from `admin` where username = #{username}")
+    @Select("select * from `sys_admin` where username = #{username}")
     Admin selectByUsername(String username);
 
     /**
@@ -56,7 +56,7 @@ public interface AdminMapper extends BaseMapperPlus<Admin, Integer> {
      *
      * @param id 要删除的管理员的ID
      */
-    @Delete("delete from `admin` where id = #{id}")
+    @Delete("delete from `sys_admin` where id = #{id}")
     void deleteById(Integer id);
 
     /**
@@ -65,7 +65,7 @@ public interface AdminMapper extends BaseMapperPlus<Admin, Integer> {
      * @param id 管理员的ID，用于查询
      * @return 对应ID的管理员对象，如果不存在则返回null
      */
-    @Select("select * from `admin` where id = #{id}")
+    @Select("select * from `sys_admin` where id = #{id}")
     Admin selectById(String id);
 
 //    @Select("select * from `admin` where id = #{id}")
