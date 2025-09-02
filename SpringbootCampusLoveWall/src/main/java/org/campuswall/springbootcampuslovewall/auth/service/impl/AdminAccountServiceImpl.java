@@ -25,7 +25,7 @@ import java.util.function.Function;
  * 实现了AccountService接口，用于处理管理员账户相关的业务逻辑
  */
 @Service
-public class AdminAccountServiceImpl extends BaseServiceImpl<Admin, Integer, AdminMapper> implements AccountService<Admin> {
+public class AdminAccountServiceImpl extends BaseServiceImpl<Admin, Integer, AdminMapper> implements AccountService<Admin,Integer> {
 
 
     @Resource
@@ -40,18 +40,6 @@ public class AdminAccountServiceImpl extends BaseServiceImpl<Admin, Integer, Adm
         super(adminMapper);
     }
 
-
-    /**
-     * 根据主键ID查询实体对象
-     *
-     * @param id 主键ID（Long类型）
-     * @return 实体对象
-     */
-    @Override
-    public Admin selectById(Long id) {
-        return null;
-    }
-
     /**
      * 获取账户角色枚举
      *
@@ -63,8 +51,10 @@ public class AdminAccountServiceImpl extends BaseServiceImpl<Admin, Integer, Adm
     }
 
     /**
-     * @param integer 账户ID
-     * @return
+     * 根据主键ID查询实体对象
+     *
+     * @param integer 主键ID
+     * @return 实体对象
      */
     @Override
     public Admin selectById(Integer integer) {
@@ -74,31 +64,31 @@ public class AdminAccountServiceImpl extends BaseServiceImpl<Admin, Integer, Adm
     /**
      * 账户登录
      *
-     * @param account 账户信息
+     * @param entity 账户信息
      * @return T 登录成功的账户对象
      */
     @Override
-    public Admin login(Admin account) {
+    public Admin login(Admin entity) {
         return null;
     }
 
     /**
      * 更新账户密码
      *
-     * @param account 包含密码信息的账户对象
+     * @param entity 包含密码信息的账户对象
      */
     @Override
-    public void updatePassword(Admin account) {
+    public void updatePassword(Admin entity) {
 
     }
 
     /**
      * 注册新账户
      *
-     * @param account 用户对象
+     * @param entity 用户对象
      */
     @Override
-    public void register(Admin account) {
+    public void register(Admin entity) {
 
     }
 
@@ -115,25 +105,27 @@ public class AdminAccountServiceImpl extends BaseServiceImpl<Admin, Integer, Adm
     /**
      * 锁定账户
      *
-     * @param id 账户ID
+     * @param integer 账户ID
      */
     @Override
-    public void lockAccount(Integer id) {
+    public void lockAccount(Integer integer) {
 
     }
 
     /**
      * 解锁账户
      *
-     * @param id 账户ID
+     * @param integer 账户ID
      */
     @Override
-    public void unlockAccount(Integer id) {
+    public void unlockAccount(Integer integer) {
 
     }
 
     /**
-     * @return
+     * 查询所有实体对象列表
+     *
+     * @return 实体对象列表
      */
     @Override
     public List<Admin> selectAll() {
@@ -262,7 +254,7 @@ public class AdminAccountServiceImpl extends BaseServiceImpl<Admin, Integer, Adm
     }
 
     /**
-     * @param integer 主键ID（Integer类型）
+     * @param integer
      */
     @Override
     public void deleteById(Integer integer) {
@@ -281,4 +273,6 @@ public class AdminAccountServiceImpl extends BaseServiceImpl<Admin, Integer, Adm
     public PageInfo<Admin> selectPage(Integer pageNum, Integer pageSize, Admin entity) {
         return null;
     }
+
+
 }
