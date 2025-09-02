@@ -89,13 +89,13 @@ public class AdminServiceImpl extends BaseServiceImpl<Admin, Long, AdminMapper> 
     }
 
     /**
-     * 根据ID删除管理员账户
-     *
-     * @param id 要删除的管理员账户ID
+     * @param id
      */
-    @Override public void deleteById(Integer id) {
-        adminMapper.deleteById(id);
+    @Override
+    public void deleteById(Integer id) {
+
     }
+
 
     /**
      * 批量删除管理员账户
