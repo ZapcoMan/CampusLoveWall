@@ -15,7 +15,6 @@ import org.campuswall.springbootcampuslovewall.mapper.UserMapper;
 
 import org.campuswall.springbootcampuslovewall.user.entity.User;
 import org.campuswall.springbootcampuslovewall.user.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -143,7 +142,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, Long, UserMapper> imp
      */
     @Override
     public void insert(User user) {
-
+        userMapper.insert(user);
     }
 
 
@@ -244,11 +243,26 @@ public class UserServiceImpl extends BaseServiceImpl<User, Long, UserMapper> imp
      *
      * @param pageNum  页码
      * @param pageSize 每页大小
-     * @param admin    查询条件对象
+     * @param entity   查询条件对象
      * @return 分页信息对象
      */
     @Override
-    public PageInfo<Admin> selectPage(Integer pageNum, Integer pageSize, Admin admin) {
+    public PageInfo<User> selectPage(Integer pageNum, Integer pageSize, User entity) {
         return null;
     }
+
+
+
+
+
+    /**
+     * 保存用户信息
+     *
+     * @param user 用户实体对象
+     */
+    @Override
+    public boolean save(User user) {
+       return userMapper.save(user);
+    }
+
 }
