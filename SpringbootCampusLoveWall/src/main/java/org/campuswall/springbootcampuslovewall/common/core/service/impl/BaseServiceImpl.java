@@ -33,23 +33,7 @@ public abstract class BaseServiceImpl<T, ID, M>  implements BaseService<T, ID> {
      */
     public abstract T selectById(ID id);
 
-    /**
-     * 根据主键ID查询实体对象
-     *
-     * @param id 主键ID
-     * @return 实体对象
-     */
-    @Override
-    public abstract T selectById(ID id);
 
-    /**
-     * 根据主键ID删除实体对象
-     *
-     * @param id 主键ID（Integer类型）
-     */
-    public abstract void deleteById(ID id);
-
-//    public abstract void deleteById(Integer id);
 
     /**
      * 查询所有实体对象列表
