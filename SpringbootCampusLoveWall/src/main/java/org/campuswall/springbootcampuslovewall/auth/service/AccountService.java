@@ -1,24 +1,70 @@
 package org.campuswall.springbootcampuslovewall.auth.service;
 
-import org.campuswall.springbootcampuslovewall.common.core.service.BaseService;
 import org.campuswall.springbootcampuslovewall.common.enums.RoleEnum;
-import org.campuswall.springbootcampuslovewall.entity.Account;
 
 /**
  * AccountService接口定义了账户服务的通用操作，包括登录、密码更新和根据角色的不同行为
+ *
+ * @param <T> 账户类型泛型参数
  */
-public interface AccountService<T> extends BaseService<Account, Integer> {
+public interface AccountService<T> {
+    /**
+     * 获取账户角色枚举
+     *
+     * @return RoleEnum 角色枚举值
+     */
+    RoleEnum getRole();
 
-    RoleEnum getRole();  // 标明服务支持哪个角色
-
-
+    /**
+     * 根据ID查询账户信息
+     *
+     * @param id 账户ID
+     * @return T 账户对象
+     */
     T selectById(Integer id);
 
+    /**
+     * 账户登录
+     *
+     * @param account 账户信息
+     * @return T 登录成功的账户对象
+     */
+    T login(T account);
 
-    void updatePassword(Account account);
+    /**
+     * 更新账户密码
+     *
+     * @param account 包含密码信息的账户对象
+     */
+    void updatePassword(T account);
 
+    /**
+     * 注册新账户
+     *
+     * @param account 用户对象
+     */
+    void register(T account);
 
-    T login(Account account);
+    /**
+     * 重置账户密码
+     *
+     * @param email 用户邮箱
+     */
+    void resetPassword(String email);
+
+    /**
+     * 锁定账户
+     *
+     * @param id 账户ID
+     */
+    void lockAccount(Integer id);
+
+    /**
+     * 解锁账户
+     *
+     * @param id 账户ID
+     */
+    void unlockAccount(Integer id);
 
 //    /**
 //     * 注册新用户默认实现抛出异常，因为不是所有角色都支持注册操作
