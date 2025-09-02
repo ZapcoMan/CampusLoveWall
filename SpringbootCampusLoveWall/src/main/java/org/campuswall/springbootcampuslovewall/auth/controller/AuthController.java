@@ -30,6 +30,10 @@ public class AuthController {
     public void init() {
         for (AccountService service : accountServices) {
             serviceMap.put(service.getRole().getCode(), service);
+            log.info("初始化角色：{}", service.getRole().getCode());
+            if (service.getRole() != null) {
+                serviceMap.put(service.getRole().getCode(), service);
+            }
         }
     }
 
