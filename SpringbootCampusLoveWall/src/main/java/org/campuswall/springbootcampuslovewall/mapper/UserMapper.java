@@ -2,9 +2,8 @@ package org.campuswall.springbootcampuslovewall.mapper;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
-import org.campuswall.springbootcampuslovewall.admin.entity.Admin;
+import org.apache.ibatis.annotations.Select;
 import org.campuswall.springbootcampuslovewall.common.core.mapper.BaseMapperPlus;
-import org.campuswall.springbootcampuslovewall.entity.Account;
 import org.campuswall.springbootcampuslovewall.user.entity.User;
 
 /**
@@ -13,12 +12,13 @@ import org.campuswall.springbootcampuslovewall.user.entity.User;
  */
 @Mapper
 public interface UserMapper extends BaseMapperPlus<User, Integer> {
-        /**
+    /**
      * 根据用户名查找用户
      *
      * @param username 用户名
      * @return 用户对象，如果未找到返回null
      */
+    @Select("select * from sys_user where username = #{username}")
     User findByUsername(String username);
 
     /**
@@ -33,7 +33,7 @@ public interface UserMapper extends BaseMapperPlus<User, Integer> {
     /**
      * 根据用户ID更新密码
      *
-     * @param id 用户ID
+     * @param id   用户ID
      * @param hash 经过加密的密码字符串
      */
     void updatePasswordById(Long id, String hash);
