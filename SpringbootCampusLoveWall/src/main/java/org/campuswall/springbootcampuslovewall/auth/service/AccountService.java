@@ -7,7 +7,7 @@ import org.campuswall.springbootcampuslovewall.common.enums.RoleEnum;
  *
  * @param <T> 账户类型泛型参数
  */
-public interface AccountService<T> {
+public interface AccountService<T,ID> {
     /**
      * 获取账户角色枚举
      *
@@ -21,29 +21,29 @@ public interface AccountService<T> {
      * @param id 账户ID
      * @return T 账户对象
      */
-    T selectById(Integer id);
+    T selectById(ID id);
 
     /**
      * 账户登录
      *
-     * @param account 账户信息
+     * @param entity 账户信息
      * @return T 登录成功的账户对象
      */
-    T login(T account);
+    T login(T entity);
 
     /**
      * 更新账户密码
      *
-     * @param account 包含密码信息的账户对象
+     * @param entity 包含密码信息的账户对象
      */
-    void updatePassword(T account);
+    void updatePassword(T entity);
 
     /**
      * 注册新账户
      *
-     * @param account 用户对象
+     * @param entity 用户对象
      */
-    void register(T account);
+    void register(T entity);
 
     /**
      * 重置账户密码
@@ -57,14 +57,14 @@ public interface AccountService<T> {
      *
      * @param id 账户ID
      */
-    void lockAccount(Integer id);
+    void lockAccount(ID id);
 
     /**
      * 解锁账户
      *
      * @param id 账户ID
      */
-    void unlockAccount(Integer id);
+    void unlockAccount(ID id);
 
 //    /**
 //     * 注册新用户默认实现抛出异常，因为不是所有角色都支持注册操作
