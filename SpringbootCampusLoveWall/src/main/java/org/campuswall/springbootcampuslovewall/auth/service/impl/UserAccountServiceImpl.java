@@ -45,7 +45,8 @@ public class UserAccountServiceImpl extends BaseServiceImpl<User, Integer, UserM
      */
     @Override
     public RoleEnum getRole() {
-        return null;
+       // 获取账户角色枚举
+        return RoleEnum.USER;
     }
 
     /**
