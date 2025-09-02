@@ -50,12 +50,12 @@ public abstract class BaseServiceImpl<T, ID, M>  implements BaseService<T, ID> {
      */
     public abstract void updateById(Long id);
 
-    @Override
     /**
      * 插入实体对象
      *
      * @param entity 实体对象
      */
+    @Override
     public abstract void insert(T entity);
 
     @Override
