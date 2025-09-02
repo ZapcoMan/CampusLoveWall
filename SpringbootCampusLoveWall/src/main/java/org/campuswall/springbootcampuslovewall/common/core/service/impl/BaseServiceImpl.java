@@ -34,6 +34,7 @@ public abstract class BaseServiceImpl<T, ID, M>  implements BaseService<T, ID> {
     public abstract T selectById(ID id);
 
 
+    public abstract void deleteById(Integer id);
 
     /**
      * 查询所有实体对象列表
