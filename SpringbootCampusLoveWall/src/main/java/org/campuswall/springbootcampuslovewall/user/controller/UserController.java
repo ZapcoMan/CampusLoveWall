@@ -39,7 +39,8 @@ public class UserController extends BaseController<User,Long> {
     @GetMapping
     public R<List<User>> list() {
         log.info("获取用户列表");
-        return R.success(userService.list());
+//        return R.success(userService.selectAll());
+        return R.ok();
     }
 
     /**
