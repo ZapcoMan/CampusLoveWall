@@ -68,7 +68,7 @@ public class AdminAccountServiceImpl extends BaseServiceImpl<Admin, Integer, Adm
      * @return T 登录成功的账户对象
      */
     @Override
-    public Admin login(Admin entity) {
+    public Admin login(Admin admin) {
         return null;
     }
 
