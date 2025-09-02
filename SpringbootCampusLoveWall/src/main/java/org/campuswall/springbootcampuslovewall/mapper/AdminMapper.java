@@ -2,6 +2,7 @@ package org.campuswall.springbootcampuslovewall.mapper;
 
 
 import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.campuswall.springbootcampuslovewall.common.core.mapper.BaseMapperPlus;
@@ -83,6 +84,9 @@ public interface AdminMapper extends BaseMapperPlus<Admin, Integer> {
      * @param account 账户信息
      */
     void insert(Account account);
+
+    @Insert("insert into sys_admin(username,password) values(#{username},#{password})")
+    boolean save(Admin admin);
 
 }
 
