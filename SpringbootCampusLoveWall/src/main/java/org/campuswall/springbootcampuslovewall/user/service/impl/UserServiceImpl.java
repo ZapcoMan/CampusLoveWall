@@ -41,6 +41,13 @@ public class UserServiceImpl extends BaseServiceImpl<User, Long, UserMapper> imp
         return userMapper.selectById(id);
     }
 
+    /**
+     * @param id
+     */
+    @Override
+    public void deleteById(Integer id) {
+        throw new UnsupportedOperationException("功能未实现");
+    }
 
 
     /** ！！！删除这个 Integer 版本，避免与 ID=Long 冲突
