@@ -251,6 +251,15 @@ public class AdminServiceImpl extends BaseServiceImpl<Admin, Long, AdminMapper> 
     }
 
     /**
+     * @param entity
+     * @return
+     */
+    @Override
+    public boolean save(Admin admin) {
+        return adminMapper.save(admin);
+    }
+
+    /**
      * 根据ID更新管理员信息
      *
      * @param id 要更新的管理员ID
